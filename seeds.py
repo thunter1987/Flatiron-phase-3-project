@@ -16,4 +16,7 @@ patients = [
     Patient(patient_first_name = "Jane", patient_last_name = "Doe", patient_phone = "832-287-9443", patient_next_appointment = datetime.now(), patient_balance = 125.97)
 ]
 
+session.bulk_save_objects(patients)
+session.commit()
+
 print("Finished Seeding!")
