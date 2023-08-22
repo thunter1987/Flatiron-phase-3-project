@@ -14,3 +14,5 @@ class Patient(Base):
     patient_created_date = Column(Date, server_default=func.current_date())
     patient_last_updated = Column(Date, onupdate=func.current_date())
     
+    def __repr__(self):
+        
