@@ -6,13 +6,14 @@ Base = declarative_base()
 class Patient(Base):
     __tablename__ = "patient"
     
-    id = Column(Integer, primary_key=True, nullable=False)
+    id = Column(Integer, primary_key=True)
     patient_first_name = Column(String, nullable=False)
     patient_last_name = Column(String, nullable=False)
     patient_phone = Column(String, nullable=False)
-    patient_next_appointment = Column(DateTime, nullable = True)
+    patient_next_appointment = Column(DateTime)
     patient_created_date = Column(Date, server_default=func.current_date())
     patient_last_updated = Column(Date, onupdate=func.current_date())
     
     def __repr__(self):
-        
+        pass
+    
