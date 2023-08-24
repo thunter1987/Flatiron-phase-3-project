@@ -15,13 +15,12 @@ from faker import Faker
 fake = Faker()
 
 session.query(Patient).delete()
-patients = []
 
 for _ in range (20):
         patient = Patient(
           patient_first_name = fake.first_name(),
           patient_last_name = fake.last_name(),
-          patient_phone = fake.phone_number()
+          patient_phone = fake.phone_number(format="???-???-????")
         )
 
 
@@ -29,9 +28,8 @@ for _ in range (20):
 #             Patient(patient_first_name="Jane", patient_last_name="Doe",
 #                     patient_phone="832-287-9443", patient_next_appointment=datetime(year=2024, month=8, day=15, hour=13, minute=30))
 #             ]
-        patients.append(patient)
         session.add(patient)
-        print (patient.id)
+        print (patient)
 session.commit()
 
 print("Finished Seeding!")

@@ -1,8 +1,8 @@
-"""creates patient table
+"""adds formatted print to models
 
-Revision ID: 6177a7976bb0
-Revises: 
-Create Date: 2023-08-23 16:27:45.967016
+Revision ID: e63a8120bdae
+Revises: 86ac676705ea
+Create Date: 2023-08-23 23:38:10.434737
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6177a7976bb0'
-down_revision = None
+revision = 'e63a8120bdae'
+down_revision = '86ac676705ea'
 branch_labels = None
 depends_on = None
 

@@ -15,5 +15,13 @@ class Patient(Base):
     patient_last_updated = Column(Date, onupdate=func.current_date())
     
     def __repr__(self):
-        pass
+        return f"\n<Patient " \
+        + f"id:{self.id}, " \
+        + f"first name:{self.patient_first_name}, " \
+        + f"last name:{self.patient_last_name}, " \
+        + f"phone:{self.patient_phone}, " \
+        + f"next appointment:{self.patient_next_appointment}, " \
+        + f"created on:{self.patient_created_date}, " \
+        + f"last updated on:{self.patient_last_updated}, " \
+        + " >"
     
