@@ -1,6 +1,8 @@
 {
   "[python]": {
-    "editor.defaultFormatter": "ms-python.autopep8"
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true
   },
-  "python.formatting.provider": "none"
+  "code-runner.defaultLanguage": "python",
+  "python.terminal.activateEnvironment": false
 }
