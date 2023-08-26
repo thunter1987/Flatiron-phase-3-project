@@ -13,7 +13,7 @@ class Patient(Base):
     patient_last_name = Column(String, nullable=False)
     patient_phone = Column(String, nullable=False)
     patient_next_appointment = Column(String(datetime) )
-    patient_created_date = Column(String(datetime), server_default=func.current_date())
+    patient_created_date = Column(DateTime, server_default=func.current_date())
     patient_last_updated = Column(DateTime, onupdate=func.current_date())
 
     def __repr__(self):
