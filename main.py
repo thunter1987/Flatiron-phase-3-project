@@ -1,12 +1,9 @@
 #!/usr/bin/env/python
-import click
-@click.command()
-@click.option("--count", default=1, help="Number of greetings.")
-@click.option("--name", prompt="Your name", help="The person to greet.")
-def hello(count, name):
-    """Simple program that greets NAME for a total of COUNT times."""
-    for _ in range(count):
-        click.echo(f"Hello, {name}!")
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from models import Patient, Doctor
 
-if __name__ == '__main__':
-    hello()
+engine = create_engine("sqlite:///patient_doctor.db")
+Session = sessionmaker(bind=engine)
+session = Session()
+print(session.query(Patient))

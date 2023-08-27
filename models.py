@@ -1,5 +1,5 @@
-from sqlalchemy import Column, DateTime, Integer, String, func
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import Column, DateTime, Integer, String, func, ForeignKey
+from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
 
@@ -14,6 +14,8 @@ class Patient(Base):
     next_appointment = Column(String)
     created_date = Column(DateTime, server_default=func.current_date())
     last_updated = Column(DateTime, onupdate=func.current_date())
+    
+    doctor_id = Column(Integer, ForeignKey("doctor.id"))
 
     def __repr__(self):
         return (
@@ -35,6 +37,8 @@ class Doctor(Base):
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
     specialty = Column(String)
+    
+    patients = relationship("Patient", backref="doctor")
     
     def __init__(self, first_name, last_name, specialty):
         self.first_name = first_name

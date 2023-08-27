@@ -58,6 +58,7 @@ for _ in range(20):
         last_name=fake.last_name(),
         phone=generate_and_format_phone_number(),
         next_appointment=generate_formatted_datetime(),
+        doctor_id = random.randint(1, 5)
     )
 
     session.add(patient)
