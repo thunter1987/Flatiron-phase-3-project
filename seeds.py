@@ -2,7 +2,7 @@ from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models import Patient
+from models import Patient, Doctor
 
 print("Starting Seed")
 
@@ -17,6 +17,7 @@ from faker import Faker
 fake = Faker()
 
 session.query(Patient).delete()
+session.query(Doctor).delete()
 
 def generate_and_format_phone_number():
   while True:
@@ -59,6 +60,15 @@ for _ in range(20):
 
     session.add(patient)
     print(patient)
+
+for _ in range(5):
+  Doctor(self, first_name, last_name, specialty)
+  first_name=self.first_name,
+  last_name=self.last_name,
+  specialty=self.specialty
+  
+  session. add(doctor)
+  print(doctor)
 session.commit()
 
 print("Finished Seeding!")
