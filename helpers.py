@@ -3,7 +3,7 @@
 import re
 from datetime import datetime
 
-def validate_date(date_str):
+def validate_datetime(date_str):
     stripped_date_str = date_str.strip()  # Strip whitespace
     try:
         datetime.strptime(stripped_date_str, "%m-%d-%Y %I:%M %p")
