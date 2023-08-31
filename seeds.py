@@ -79,3 +79,79 @@ session.commit()
 session.close()
 
 print("Finished Seeding!")
+
+        ###########NEW CODE#########
+'''
+    MOVE TO:   # app/seeds.py
+
+import random
+from sqlalchemy.orm import Session
+from .models import Doctor, Patient, Appointment
+from datetime import datetime, timedelta
+
+# List of possible medical specialty fields
+medical_specialties = [
+    "Cardiology",
+    "Dermatology",
+    "Gastroenterology",
+    "Neurology",
+    "Orthopedics",
+    "Pediatrics",
+    "Psychiatry",
+    "Radiology",
+    "Urology",
+    "Ophthalmology",
+    "Oncology",
+    "Endocrinology"
+]
+
+def seed_data(session: Session):
+    # Add doctors with random medical specialties
+    doctors = []
+    for _ in range(5):
+        first_name = f"Doctor{random.randint(1, 100)}"
+        last_name = "Smith"
+        specialty = random.choice(medical_specialties)
+        doctor = Doctor(first_name=first_name, last_name=last_name, specialty=specialty)
+        doctors.append(doctor)
+    
+    session.add_all(doctors)
+    session.commit()
+
+   # Add patients
+    patients = []
+    for _ in range(20):
+        first_name = f"Patient{random.randint(1, 100)}"
+        last_name = "Doe"
+        phone_number = f"({random.randint(100, 999)}) {random.randint(100, 999)}-{random.randint(1000, 9999)}"
+        next_appointment = (datetime.now() + timedelta(days=random.randint(1, 30))).strftime("%m-%d-%Y %I:%M %p")
+        patient = Patient(first_name=first_name, last_name=last_name, phone_number=phone_number, next_appointment=next_appointment)
+        patients.append(patient)
+    
+    session.add_all(patients)
+    session.commit()
+
+    # Add appointments for patients
+    for patient in patients:
+        for _ in range(4):  # Adding 4 appointments for each patient
+            doctor = random.choice(doctors)
+            date_time = datetime.now() + timedelta(days=random.randint(1, 30), hours=random.randint(8, 17))
+            appointment = Appointment(doctor_id=doctor.id, patient_id=patient.id, date_time=date_time)
+            session.add(appointment)
+    
+    session.commit()
+
+if __name__ == "__main__":
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+    from app.models import Base
+
+    database_url = "sqlite:///app.db"  # Change this to your database URL
+    engine = create_engine(database_url)
+    Base.metadata.create_all(bind=engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    seed_data(session)
+
+'''
