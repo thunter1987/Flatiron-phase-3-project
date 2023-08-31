@@ -5,12 +5,19 @@ from datetime import datetime
 from sqlalchemy.orm import sessionmaker
 from .models import Patient, Doctor, Appointment
 from .helpers import validate_datetime, validate_phone_number, validate_mm_dd_yyyy, sanitize_input
+from banners.py import 
+welcome_banner,
+doctor_submenu_banner,
+patient_submenu_banner,
+appointment_submenu_banner
+
 from simple_terminal_menu import TerminalMenu
 from tabulate import tabulate  # Import the tabulate library for formatting tables
 import re
 
 def main_menu(session):
     while True:
+        welcome_banner()
         main_menu_items = [
             "Doctor Options",
             "Patient Options",
@@ -34,6 +41,7 @@ def main_menu(session):
             print("Invalid option. Please choose a valid option.")
 
 def doctor_submenu(session):
+    doctor_submenu_banner()
     doctor_submenu_items = [
         "View All Doctors",
         "Search Doctor by ID",
@@ -54,6 +62,7 @@ def doctor_submenu(session):
         return
 
 def patient_submenu(session):
+    patient_submenu_banner()
     patient_submenu_items = [
         "View All Patients",
         "Add Patient",
@@ -120,6 +129,7 @@ def search_by_doctor_menu(session):
         if appointments:
             appointment_data = [(appointment.id, appointment.patient.first_name, appointment.patient.last_name, appointment.date_time) for appointment in appointments]
             headers = ["Appointment ID", "Patient First Name", "Patient Last Name", "Date and Time"]
+            print(appointment_submenu_banner())
             print(tabulate(appointment_data, headers=headers, tablefmt="grid"))
         else:
             print("No appointments found for this doctor.")
@@ -162,7 +172,8 @@ def search_all_appointments_by_patient(session):
         if appointments:
             appointment_data = [(appointment.id, appointment.doctor.first_name, appointment.doctor.last_name, appointment.date_time) for appointment in appointments]
             headers = ["Appointment ID", "Doctor First Name", "Doctor Last Name"]
-
+            print(appointment_submenu_banner())
+            print(tabulate(appointment_data, headers=headers, tablefmt="grid"))
 def main():
     parser = argparse.ArgumentParser(description="CLI App for Patient Appointments")
     parser.add_argument("database_url", type=str, help="Database URL")
