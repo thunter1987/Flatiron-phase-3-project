@@ -1,3 +1,6 @@
+# Move To The App Folder!!!
+
+
 from sqlalchemy import Column, DateTime, Integer, String, func, ForeignKey
 from sqlalchemy.orm import declarative_base, relationship
 
@@ -64,7 +67,7 @@ class Doctor(Base):
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
-from .helpers import validate_date, validate_phone_number, validate_mm_dd_yyyy
+from .helpers import validate_datetime, validate_phone_number, validate_mm_dd_yyyy
 
 Base = declarative_base()
 
