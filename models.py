@@ -60,9 +60,11 @@ class Doctor(Base):
     
 
 '''
+
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+from .helpers import validate_date, validate_phone_number, validate_mm_dd_yyyy
 
 Base = declarative_base()
 
@@ -71,10 +73,10 @@ class Patient(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
-    phone_number = Column(String)
-    next_appointment = Column(String)
-    created_date = Column(String)
-    last_updated = Column(String)
+    phone_number = Column(String, validate=validate_phone_number)
+    next_appointment = Column(String, validate=validate_date)
+    created_date = Column(String, validate=validate_mm_dd_yyyy)
+    last_updated = Column(String, validate=validate_date)
     appointments = relationship('Appointment', back_populates='patient')
 
 class Doctor(Base):
@@ -89,9 +91,10 @@ class Appointment(Base):
     id = Column(Integer, primary_key=True)
     patient_id = Column(Integer, ForeignKey('patients.id'))
     doctor_id = Column(Integer, ForeignKey('doctors.id'))
-    date_time = Column(String, nullable=False)
+    date_time = Column(String, nullable=False, validate=validate_date)
     actual_doctor = Column(Boolean, default=False)
     patient = relationship('Patient', back_populates='appointments')
     doctor = relationship('Doctor', back_populates='appointments')
+    
     '''
     
