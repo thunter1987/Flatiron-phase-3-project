@@ -1,4 +1,5 @@
 # Flatiron-phase-3-project
+
 ## Appointment Tracking CLI App
 
 The Appointment Tracking CLI App is a simple command-line application designed to help you manage patient appointments and doctor information. This app allows you to keep track of appointments, patient details, and doctor information using a user-friendly interface.
@@ -14,29 +15,29 @@ The Appointment Tracking CLI App is a simple command-line application designed t
 
 ### Getting Started
 
-1. **Installation**: Before using the app, make sure you have Python and the required dependencies installed. You can install the dependencies using the following command:
+1. **Installation**: Before using the app, make sure you have Python installed. You can install the dependencies using the following command:
 
-    ```
-    pip install -r requirements.txt
+    ```python
+    pipenv install; pipenv shell
     ```
 
 2. **Database Setup**: The app uses an SQLite database to store information. The database file (`app.db`) will be automatically created when you run migrations and seed data.
 
 3. **Running Migrations**: To set up the database schema, run the following command:
 
-    ```
+    ```python
     alembic upgrade head
     ```
 
 4. **Seeding Data**: You can populate the database with initial data by running the seeds script:
 
-    ```
+    ```python
     python seeds.py
     ```
 
 5. **Using the App**: To use the app, run the following command:
 
-    ```
+    ```python
     python cli.py <database_url>
     ```
 
